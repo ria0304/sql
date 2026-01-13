@@ -1,0 +1,51 @@
+mysql> use  test_rdbms;
+Database changed
+mysql> create table products(
+    -> product_id int primary key,
+    -> low_fats varchar(3),
+    -> recyclable varchar(3));
+Query OK, 0 rows affected (0.12 sec)
+mysql> insert into products(product_id,low_fats, recyclable) values(0,'Y',"N");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into products(product_id,low_fats, recyclable) values(1,'Y',"Y");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products(product_id,low_fats, recyclable) values(2,'N',"Y");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products(product_id,low_fats, recyclable) values(3,'Y',"Y");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products(product_id,low_fats, recyclable) values(4,'N',"N");
+Query OK, 1 row affected (0.00 sec)
+mysql> DESC PRODUCTS;
++------------+------------+------+-----+---------+-------+
+| Field      | Type       | Null | Key | Default | Extra |
++------------+------------+------+-----+---------+-------+
+| product_id | int        | NO   | PRI | NULL    |       |
+| low_fats   | varchar(3) | YES  |     | NULL    |       |
+| recyclable | varchar(3) | YES  |     | NULL    |       |
++------------+------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> select * from products;
++------------+----------+------------+
+| product_id | low_fats | recyclable |
++------------+----------+------------+
+|          0 | Y        | N          |
+|          1 | Y        | Y          |
+|          2 | N        | Y          |
+|          3 | Y        | Y          |
+|          4 | N        | N          |
++------------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from products where low_fats='Y' and  recyclable ='Y';
++------------+----------+------------+
+| product_id | low_fats | recyclable |
++------------+----------+------------+
+|          1 | Y        | Y          |
+|          3 | Y        | Y          |
++------------+----------+------------+
+2 rows in set (0.00 sec)

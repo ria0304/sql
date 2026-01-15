@@ -1,0 +1,133 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignmentexp1     |
+| ecommercedb        |
+| f1                 |
+| ferrari            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sales              |
+| sys                |
+| test_rdbms         |
++--------------------+
+10 rows in set (0.05 sec)
+
+mysql> use test_rdbms;
+Database changed
+mysql> create table student(
+    -> id int(15) primary key,
+    -> name varchar(50),
+    -> age int,
+    -> grade char);
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> create table student1(
+    -> id int(16),
+    -> name varchar(16),
+    -> departmet varchar(16));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> alter table student1 add primary key (id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student1;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | NO   | PRI | NULL    |       |
+| name      | varchar(16) | YES  |     | NULL    |       |
+| departmet | varchar(16) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> alter table student1 drop primary key(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(id)' at line 1
+mysql> alter table student1 drop primary key;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student1;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | NO   |     | NULL    |       |
+| name      | varchar(16) | YES  |     | NULL    |       |
+| departmet | varchar(16) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student1 modify id int not NULL;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student1;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | NO   |     | NULL    |       |
+| name      | varchar(16) | YES  |     | NULL    |       |
+| departmet | varchar(16) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student1 change id s_id int not NULL;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student1;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| s_id      | int         | NO   |     | NULL    |       |
+| name      | varchar(16) | YES  |     | NULL    |       |
+| departmet | varchar(16) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student1 add constraint unique(id);
+ERROR 1072 (42000): Key column 'id' doesn't exist in table
+mysql> alter table student1 add constraint unique(s_id);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student1 drop constraint unique;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unique' at line 1
+mysql> desc student1;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| s_id      | int         | NO   | PRI | NULL    |       |
+| name      | varchar(16) | YES  |     | NULL    |       |
+| departmet | varchar(16) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student1 drop primary key;
+ERROR 1091 (42000): Can't DROP 'PRIMARY'; check that column/key exists
+mysql> desc student1;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| s_id      | int         | NO   | PRI | NULL    |       |
+| name      | varchar(16) | YES  |     | NULL    |       |
+| departmet | varchar(16) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE student1 DROP INDEX s_id;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student1;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| s_id      | int         | NO   |     | NULL    |       |
+| name      | varchar(16) | YES  |     | NULL    |       |
+| departmet | varchar(16) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)

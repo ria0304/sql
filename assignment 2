@@ -1,0 +1,171 @@
+Assignment Experiment 2
+Q.1 Create a table named Books with the following structure:
+o	BookID (INT, Primary Key)
+o	Title (VARCHAR(100))
+o	Author (VARCHAR(100))
+o	Price (DECIMAL(10, 2))
+o	Quantity (INT)
+CREATE TABLE Books (
+    ->     BookID INT PRIMARY KEY,
+    ->     Title VARCHAR(100),
+    ->     Author VARCHAR(100),
+    ->     Price DECIMAL(10, 2),
+    ->     Quantity INT
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+Creates a table named Books to store book details such as ID, title, author, price, and quantity. BookID uniquely identifies each book.
+
+Answer the following in SQL/ MySQL query
+1.	Insert 5 records into the Books table with sample data.
+
+mysql> INSERT INTO Books (BookID, Title, Author, Price, Quantity) VALUES
+    -> (1, 'The Great Gatsby', 'F. Scott Fitzgerald', 250.00, 15),
+    -> (2, 'To Kill a Mockingbird', 'Harper Lee', 300.00, 20),
+    -> (3, '1984', 'George Orwell', 400.00, 10),
+    -> (4, 'Harry Potter and the Sorcerer\'s Stone', 'J.K. Rowling', 550.00, 25),
+    -> (5, 'Pride and Prejudice', 'Jane Austen', 150.00, 30);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+Adds five sample book records into the Books table 
+
+2.	Insert a new record where the Price is NULL and Quantity is 0.
+mysql> INSERT INTO Books (BookID, Title, Author, Price, Quantity) VALUES
+    -> (6, 'Sample Book', 'Unknown Author', NULL, 0);
+Query OK, 1 row affected (0.01 sec)
+Demonstrates how to insert missing (NULL) values and zero values into a table,
+Q.2 Answer the following in SQL/ MySQL query
+1.	Write a query to fetch all the records from the Books table.
+mysql> SELECT * FROM Books;
++--------+---------------------------------------+---------------------+--------+----------+
+| BookID | Title                                 | Author              | Price  | Quantity |
++--------+---------------------------------------+---------------------+--------+----------+
+|      1 | The Great Gatsby                      | F. Scott Fitzgerald | 250.00 |       15 |
+|      2 | To Kill a Mockingbird                 | Harper Lee          | 300.00 |       20 |
+|      3 | 1984                                  | George Orwell       | 400.00 |       10 |
+|      4 | Harry Potter and the Sorcerer's Stone | J.K. Rowling        | 550.00 |       25 |
+|      5 | Pride and Prejudice                   | Jane Austen         | 150.00 |       30 |
+|      6 | Sample Book                           | Unknown Author      |   NULL |        0 |
++--------+---------------------------------------+---------------------+--------+----------+
+Retrieves and displays all columns and all rows from the Books table.
+
+2.	Fetch only the Title and Author columns from the Books table.
+SELECT Title, Author FROM Books;
++---------------------------------------+---------------------+
+| Title                                 | Author              |
++---------------------------------------+---------------------+
+| The Great Gatsby                      | F. Scott Fitzgerald |
+| To Kill a Mockingbird                 | Harper Lee          |
+| 1984                                  | George Orwell       |
+| Harry Potter and the Sorcerer's Stone | J.K. Rowling        |
+| Pride and Prejudice                   | Jane Austen         |
+| Sample Book                           | Unknown Author      |
++---------------------------------------+---------------------+
+6 rows in set (0.00 sec)
+Retrieves only specific columns (Title and Author)
+3.	Write a query to find books where the Price is greater than 500.
+mysql> SELECT * FROM Books WHERE Price > 500;
++--------+---------------------------------------+--------------+--------+----------+
+| BookID | Title                                 | Author       | Price  | Quantity |
++--------+---------------------------------------+--------------+--------+----------+
+|      4 | Harry Potter and the Sorcerer's Stone | J.K. Rowling | 550.00 |       25 |
++--------+---------------------------------------+--------------+--------+----------+
+1 row in set (0.01 sec)
+Filters and displays only those books whose price is more than 500.
+4.	Write a query to sort the books by Title in descending order.
+mysql> SELECT * FROM Books ORDER BY Title DESC;
++--------+---------------------------------------+---------------------+--------+----------+
+| BookID | Title                                 | Author              | Price  | Quantity |
++--------+---------------------------------------+---------------------+--------+----------+
+|      2 | To Kill a Mockingbird                 | Harper Lee          | 300.00 |       20 |
+|      1 | The Great Gatsby                      | F. Scott Fitzgerald | 250.00 |       15 |
+|      6 | Sample Book                           | Unknown Author      |   NULL |        0 |
+|      5 | Pride and Prejudice                   | Jane Austen         | 150.00 |       30 |
+|      4 | Harry Potter and the Sorcerer's Stone | J.K. Rowling        | 550.00 |       25 |
+|      3 | 1984                                  | George Orwell       | 400.00 |       10 |
++--------+---------------------------------------+---------------------+--------+----------+
+6 rows in set (0.00 sec)
+Arranges book records alphabetically by title in descending order
+5.	Write a query to count the total number of books available in the table.
+mysql> SELECT COUNT(*) AS TotalBooks FROM Books;
++------------+
+| TotalBooks |
++------------+
+|          6 |
++------------+
+1 row in set (0.01 sec)
+Counts the total number of records present in the Books table.
+Q.3 Answer the following in SQL/ MySQL query
+1.	Update the Price of a book with BookID = 3 to 800.
+mysql> UPDATE Books SET Price = 800.00 WHERE BookID = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+Modifies the price of a specific book identified by its BookID.
+2.	Write a query to reduce the Price of all books by 10%.
+mysql> UPDATE Books SET Price = Price * 0.9 WHERE Price IS NOT NULL;
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+Applies a 10% discount to all books that have a valid price, avoiding NULL values.
+3.	Update the Quantity of all books written by "J.K. Rowling" to 50.
+mysql> UPDATE Books SET Quantity = 50 WHERE Author = 'J.K. Rowling';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+Updates the stock quantity of all books written by a specific author.
+
+Q.4 Answer the following in SQL/ MySQL query
+1.	Delete the record of the book with BookID = 5.
+mysql> DELETE FROM Books WHERE BookID = 5;
+Query OK, 1 row affected (0.01 sec)
+Removes a single book record identified by its primary key.
+2.	Write a query to delete all books with a Price less than 200.
+
+mysql> DELETE FROM Books WHERE Price < 200;
+Query OK, 0 rows affected (0.00 sec)
+Deletes all low-priced books from the table.
+3.	Delete all records from the Books table but keep the structure of the table intact.
+
+mysql> DELETE FROM Books;
+Query OK, 5 rows affected (0.01 sec)
+Removes all data from the table while preserving the table structure 
+Q.5 Create a table named Students with the following columns:
+o	StudentID (INT, Primary Key)
+o	Name (VARCHAR(100))
+o	Age (INT)
+o	Grade (CHAR(1))
+mysql> CREATE TABLE Students (
+    ->     StudentID INT PRIMARY KEY,
+    ->     Name VARCHAR(100),
+    ->     Age INT,
+    ->     Grade CHAR(1)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+Answer the following in SQL/ MySQL query Insert 5 records into the table.
+mysql> INSERT INTO Students (StudentID, Name, Age, Grade) VALUES
+    -> (1, 'Alice Johnson', 16, 'A'),
+    -> (2, 'Bob Smith', 17, 'B'),
+    -> (3, 'Charlie Brown', 15, 'A'),
+    -> (4, 'Diana Prince', 18, 'C'),
+    -> (5, 'Eve Wilson', 16, 'D');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+1.	Write a query to fetch all students with a Grade of 'A'.
+mysql> SELECT * FROM Students WHERE Grade = 'A';
++-----------+---------------+------+-------+
+| StudentID | Name          | Age  | Grade |
++-----------+---------------+------+-------+
+|         1 | Alice Johnson |   16 | A     |
+|         3 | Charlie Brown |   15 | A     |
++-----------+---------------+------+-------+
+2 rows in set (0.00 sec)
+Retrieves details of students who scored grade ‘A’.
+2.	Update the Age of all students to Age + 1.
+mysql> UPDATE Students SET Age = Age + 1;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+Updates every student’s age, simulating the passing of one academic year.
+3.	Delete all students with a Grade of 'D'.
+mysql> DELETE FROM Students WHERE Grade = 'D';
+Query OK, 1 row affected (0.00 sec)
+Removes records of students who have grade ‘D’ from the table.
+

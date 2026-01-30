@@ -1,0 +1,126 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignmentexp1     |
+| assignmentexp2     |
+| ecommercedb        |
+| f1                 |
+| ferrari            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sales              |
+| sys                |
+| test_rdbms         |
++--------------------+
+11 rows in set (0.11 sec)
+
+mysql> create database assignmentexp3;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use assignmentexp3;
+Database changed
+mysql>
+mysql> SELECT ABS(-25) AS absolute_value, CEIL(7.3) AS ceiling_value, FLOOR(7.9) AS floor_value;
++----------------+---------------+-------------+
+| absolute_value | ceiling_value | floor_value |
++----------------+---------------+-------------+
+|             25 |             8 |           7 |
++----------------+---------------+-------------+
+1 row in set (0.01 sec)
+
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(50),
+    ->     department VARCHAR(50),
+    ->     salary DECIMAL(10, 2),
+    ->     hire_date DATE
+    -> );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> INSERT INTO employees (emp_id, emp_name, department, salary, hire_date) VALUES
+    -> (101, 'Alice', 'HR', 50000, '2020-05-15'),
+    -> (102, 'Bob', 'IT', 60000, '2019-07-23'),
+    -> (103, 'Charlie', 'Finance', 55000, '2021-03-10'),
+    -> (104, 'David', 'IT', 70000, '2018-12-01'),
+    -> (105, 'Emma', 'Marketing', 48000, '2022-06-05');
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT COUNT(*) AS total_employees FROM employees;
++-----------------+
+| total_employees |
++-----------------+
+|               5 |
++-----------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT AVG(salary) AS average_salary FROM employees;
++----------------+
+| average_salary |
++----------------+
+|   56600.000000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(salary) AS highest_salary, MIN(salary) AS lowest_salary FROM employees;
++----------------+---------------+
+| highest_salary | lowest_salary |
++----------------+---------------+
+|       70000.00 |      48000.00 |
++----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(salary) AS total_salary FROM employees;
++--------------+
+| total_salary |
++--------------+
+|    283000.00 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(salary) AS total_it_salary FROM employees WHERE department = 'IT';
++-----------------+
+| total_it_salary |
++-----------------+
+|       130000.00 |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT AVG(salary) AS average_finance_salary FROM employees WHERE department = 'Finance';
++------------------------+
+| average_finance_salary |
++------------------------+
+|           55000.000000 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(hire_date) AS most_recent_hire_date FROM employees;
++-----------------------+
+| most_recent_hire_date |
++-----------------------+
+| 2022-06-05            |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT
+    ->     UPPER('Database Management') AS uppercase_string,
+    ->     LEFT('Database Management', 8) AS first_8_chars,
+    ->     LENGTH('Database Management') AS string_length;
++---------------------+---------------+---------------+
+| uppercase_string    | first_8_chars | string_length |
++---------------------+---------------+---------------+
+| DATABASE MANAGEMENT | Database      |            19 |
++---------------------+---------------+---------------+
+1 row in set (0.01 sec)
+mysql> SELECT
+    ->     CURDATE() AS today,
+    ->     YEAR('2024-01-29') AS extracted_year,
+    ->     DATEDIFF('2025-01-01', '2024-01-29') AS days_difference;
++------------+----------------+-----------------+
+| today      | extracted_year | days_difference |
++------------+----------------+-----------------+
+| 2026-01-31 |           2024 |             338 |
++------------+----------------+-----------------+
+1 row in set (0.01 sec)
